@@ -1,14 +1,17 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        map<int,int> mpp;
-        int maxi=0;
-        for(int i=0; i<nums.size(); i++)
-        {
-            mpp[nums[i]]++;
-            if(mpp[nums[i]]>mpp[maxi])
-                maxi=nums[i];
+        int slow=nums[0];
+        int fast=nums[0];
+        do{
+            slow=nums[slow];
+            fast=nums[nums[fast]];
+        }while(slow!=fast);
+        fast=nums[0];
+        while(slow!=fast){
+            slow=nums[slow];
+            fast=nums[fast];
         }
-        return maxi;
+        return slow;
     }
 };
