@@ -9,18 +9,20 @@ public:
     }
     void fun(int index, vector<int> &can, vector<vector<int>> &ans, vector<int> &vec, int target, int size)
     {
-        
-        if(index==size){
-            if(target==0){
-                ans.push_back(vec);
-            }
-            return;
+        if(target==0){
+            ans.push_back(vec);
         }
-        vec.push_back(can[index]);
-        if(target-can[index]>=0)
-            fun(index,can,ans,vec,target-can[index],size);
-        vec.pop_back();
-        fun(index+1,can,ans,vec,target,size);
+        else
+        {
+            if(index==size){
+                return;
+            }
+            vec.push_back(can[index]);
+            if(target-can[index]>=0)
+                fun(index,can,ans,vec,target-can[index],size);
+            vec.pop_back();
+            fun(index+1,can,ans,vec,target,size);
+        }
         
     }
 };
